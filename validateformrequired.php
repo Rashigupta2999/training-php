@@ -9,7 +9,7 @@
 
 <?php
 // define variables and set to empty values
-$nameErr = $emailErr = $genderErr = $websiteErr = "";
+$nameErr = $emailErr = $genderErr = $websiteErr = "";  //hold error msg for required fields
 $name = $email = $gender = $comment = $website = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
