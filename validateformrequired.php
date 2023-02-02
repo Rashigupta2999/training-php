@@ -12,23 +12,32 @@
 $nameErr = $emailErr = $genderErr = $websiteErr = "";  //hold error msg for required fields
 $name = $email = $gender = $comment = $website = "";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  if (empty($_POST["name"])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST") { //check if the for is submitted 
+  if (empty($_POST["name"])) {   //if the name field is empty then show error message
     $nameErr = "Name is required";
   } else {
     $name = test_input($_POST["name"]);
+    if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) {  //check name only contain letters,whitespaces and apostrophe
+        $nameErr = "Only letters and white space allowed";  //^= match start string, $=match end of string
+      }
   }
   
   if (empty($_POST["email"])) {
     $emailErr = "Email is required";
   } else {
     $email = test_input($_POST["email"]);
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $emailErr = "Invalid email format";
+      }
   }
     
   if (empty($_POST["website"])) {
     $website = "";
   } else {
     $website = test_input($_POST["website"]);
+    if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$website)) {
+        $websiteErr = "Invalid URL";
+      } 
   }
 
   if (empty($_POST["comment"])) {
@@ -55,7 +64,7 @@ function test_input($data) {
 <h2>PHP Form Validation Example</h2>
 <p><span class="error">* required field</span></p>
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
-  Name: <input type="text" name="name">
+  Name: <input type="text" name="name">  <!--create label and form-->
   <span class="error">* <?php echo $nameErr;?></span>
   <br><br>
   E-mail: <input type="text" name="email">
