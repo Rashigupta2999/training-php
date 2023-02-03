@@ -31,9 +31,58 @@
         margin:0;
         padding:17px;
     }
-   
-</style>
+    .green{
+        background-color:lightgreen;
+    }
+    .orange{
+        background-color:orange;
+    }
+    .yellow{
+        background-color:yellow;
+    }
+    .pink{
+        background-color:lightpink;
+    }
+    .grey{
+        background-color:lightgrey;
+    }
+    .red{
+        background-color:red;
+    }
+
+    </style>
 <?php
+    
+        function get_grade($marks){
+         
+            $grade = 'F';
+            echo '<span class="red"</span>';
+
+            if($marks<=100 && $marks>=95){
+                $grade = " A+ ";
+                echo '<span class="green"</span>';
+             }elseif($marks<=94 && $marks>=85){
+                $grade = " A ";
+                echo '<span class="green"</span>';
+             }elseif($marks<=84 && $marks>=75){
+                $grade = " B ";
+                echo '<span class="orange"</span>';
+             }elseif($marks<=74 && $marks>=65){
+                $grade = " C ";
+                echo '<span class="yellow"</span>';
+             }elseif($marks<=64 && $marks>=55){
+                $grade = " D ";
+                echo '<span class="pink"</span>';
+             }elseif($marks<=54 && $marks>=45){
+                 $grade = " E ";
+                 echo '<span class="grey"</span>';
+             }
+
+             return $grade;
+
+        }
+       
+
       if(isset($_POST['submit'])){  //if submit is set on post
           $name=$_POST['sname'];
           $father=$_POST['fname'];
@@ -53,67 +102,7 @@
         $ftotal= $total * 5;
 
      }
-     if($engmrk<=100 && $engmrk>=95){
-        $grade1 = " A+ ";
-     }elseif($engmrk<=94 && $engmrk>=85){
-        $grade1 = " A ";
-     }elseif($engmrk>=70 && $engmrk<=84){
-        $grade1 = " B ";
-     }else{
-        $grade1 = " C ";
-     }
-
-     if($hinmrk<=100 && $hinmrk>=95){
-        $grade2 = " A+ ";
-     }elseif($hinmrk<=94 && $hinmrk>=85){
-        $grade2 = " A ";
-     }elseif($hinmrk>=70 && $hinmrk<=84){
-        $grade2 = " B ";
-     }else{
-        $grade2 = " C ";
-     }
-
-     if($mathmrk<=100 && $mathmrk>=95){
-        $grade3 = " A+ ";
-     }elseif($mathmrk<=94 && $mathmrk>=85){
-        $grade3 = " A ";
-     }elseif($mathmrk>=70 && $mathmrk<=84){
-        $grade3 = " B ";
-     }else{
-        $grade3 = " C ";
-     }
-
-     if($scnmrk<=100 && $scnmrk>=95){
-        $grade4 = " A+ ";
-     }elseif($scnmrk<=94 && $scnmrk>=85){
-        $grade4 = " A ";
-     }elseif($scnmrk>=70 && $scnmrk<=84){
-        $grade4 = " B ";
-     }else{
-        $grade4 = " C ";
-     }
-
-     if($javamrk<=100 && $javamrk>=95){
-        $grade5 = " A+ ";
-     }elseif($javamrk<=94 && $javamrk>=85){
-        $grade5 = " A ";
-     }elseif($javamrk>=70 && $javamrk<=84){
-        $grade5 = " B ";
-     }else{
-        $grade5 = " C ";
-     }
-
-    if($per<=100 && $per>=95){
-        $grade= " A+ ";
-     }elseif($per<=94 && $per>=80){
-        $grade= " A ";
-     }elseif($per<=79 && $per>=65){
-        $grade= " B+ ";
-     }elseif($per<=64 && $per>=55){
-        $grade= " B ";
-     }else{
-        $grade = " C ";
-     }
+     
 
      
 ?>
@@ -146,7 +135,7 @@ echo "<h3>DOB : $dob</h3>";
    <th>English</th>
    <td><?php echo $engmrk ?> </td>
    <td><?php echo $total ?> </td>
-   <td><?php echo $grade1 ?> </td>
+   <td><?php echo get_grade($engmrk); ?> </td>
 
 </tr>
     
@@ -154,33 +143,33 @@ echo "<h3>DOB : $dob</h3>";
     <th>Hindi</th>
     <td><?php echo $hinmrk ?> </td>
     <td><?php echo $total ?> </td>
-    <td><?php echo $grade2 ?> </td>
+    <td><?php echo get_grade($hinmrk); ?> </td>
 </tr>
 
     <tr>
       <th>Math</th>
       <td><?php echo $mathmrk ?> </td>
       <td><?php echo $total ?> </td>
-      <td><?php echo $grade3 ?> </td>
+      <td><?php echo get_grade($mathmrk); ?> </td>
     </tr>
     <tr>
       <th>Science</th>
       <td><?php echo $scnmrk ?> </td>
       <td><?php echo $total ?> </td>
-      <td><?php echo $grade4 ?> </td>
+      <td><?php echo get_grade($scnmrk); ?> </td>
     </tr>
     <tr>
       <th>Java</th>
       <td><?php echo $javamrk ?> </td>
       <td><?php echo $total ?> </td>
-      <td><?php echo $grade5 ?> </td>
+      <td><?php echo get_grade($javamrk) ?> </td>
 
     </tr>
     <tr>
         <th><h3 class="h">Result</h3></th>
         <td><?php echo " <b>Obtained Marks:  </b>" .$obt ?>
          <td><?php echo " <b>Total Marks: </b>" .$ftotal. " | <b>Percentage:  </b>" .$per. "%" ?> </td>  
-        <td><?php echo " <b>Grade :  </b>" .$grade ?> </td>
+        <td><?php echo " <b>Grade :  </b>" .get_grade($per) ?> </td>
     </tr>
    
 
