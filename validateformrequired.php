@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { //check if the for is submitted
 
 function test_input($data) {
   $data = trim($data);
-  $data = stripslashes($data);
+  $data = stripslashes($data); //remove the back slashes
   $data = htmlspecialchars($data);
   return $data;
 }
