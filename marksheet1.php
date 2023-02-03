@@ -55,30 +55,22 @@
     
         function get_grade($marks){
          
-            $grade = 'F';
-            echo '<span class="red"</span>';
-
             if($marks<=100 && $marks>=95){
-                $grade = " A+ ";
-                echo '<span class="green"</span>';
+                
+                echo '<span class="green">A+</span>';
              }elseif($marks<=94 && $marks>=85){
-                $grade = " A ";
-                echo '<span class="green"</span>';
+                echo '<span class="green">A</span>';
              }elseif($marks<=84 && $marks>=75){
-                $grade = " B ";
-                echo '<span class="orange"</span>';
+                echo '<span class="orange">B</span>';
              }elseif($marks<=74 && $marks>=65){
-                $grade = " C ";
-                echo '<span class="yellow"</span>';
+                echo '<span class="yellow">C</span>';
              }elseif($marks<=64 && $marks>=55){
-                $grade = " D ";
-                echo '<span class="pink"</span>';
+                echo '<span class="pink">D</span>';
              }elseif($marks<=54 && $marks>=45){
-                 $grade = " E ";
-                 echo '<span class="grey"</span>';
+                echo '<span class="grey">E</span>';
+             }else{
+                echo '<span class="red">F</span>';
              }
-
-             return $grade;
 
         }
        
@@ -169,7 +161,7 @@ echo "<h3>DOB : $dob</h3>";
         <th><h3 class="h">Result</h3></th>
         <td><?php echo " <b>Obtained Marks:  </b>" .$obt ?>
          <td><?php echo " <b>Total Marks: </b>" .$ftotal. " | <b>Percentage:  </b>" .$per. "%" ?> </td>  
-        <td><?php echo " <b>Grade :  </b>" .get_grade($per) ?> </td>
+        <td><?php echo " <b>Grade :  </b>"; get_grade($per) ?> </td>
     </tr>
    
 
