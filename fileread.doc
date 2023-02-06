@@ -1,0 +1,5 @@
+Hi This is the example of file read using <br>
+echo readfile('filename); <br>
+
+We can use any file with any extension.<br>
+readfile() is also return the number of bytes read on success.
