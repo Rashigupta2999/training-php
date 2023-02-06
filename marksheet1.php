@@ -161,7 +161,8 @@ echo "<h3>DOB : $dob</h3>";
         <th><h3 class="h">Result</h3></th>
         <td><?php echo " <b>Obtained Marks:  </b>" .$obt ?>
          <td><?php echo " <b>Total Marks: </b>" .$ftotal. " | <b>Percentage:  </b>" .$per. "%" ?> </td>  
-        <td><?php echo " <b>Grade :  </b>"; get_grade($per) ?> </td>
+        <td><?php echo " <b>Grade :  </b>"; 
+        get_grade($per) ?> </td>
     </tr>
    
 
