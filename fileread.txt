@@ -1,0 +1,14 @@
+<h1> Example of readfile property</h1><br>
+<p> In this we used readfile to open and read the particular file</p>
+
+HTML stands for Hyper Text Markup Language.<br>
+Tomorrow is Tuesday.Hello I am Rashi
+Example of fwrite
+Hello I am Rashi
+Example of fwrite
+Hello I am Rashi
+Example of fwrite
+Hello I am Rashi
+Example of fwrite
+Hello I am Rashi
+Example of fwrite
