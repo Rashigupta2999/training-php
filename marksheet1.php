@@ -31,49 +31,30 @@
         margin:0;
         padding:17px;
     }
-    .green{
-        background-color:lightgreen;
-    }
-    .orange{
-        background-color:orange;
-    }
-    .yellow{
-        background-color:yellow;
-    }
-    .pink{
-        background-color:lightpink;
-    }
-    .grey{
-        background-color:lightgrey;
-    }
-    .red{
-        background-color:red;
-    }
-
+    
     </style>
 <?php
     
-        function get_grade($marks){
-         
-            if($marks<=100 && $marks>=95){
-                
-                echo '<span class="green">A+</span>';
-             }elseif($marks<=94 && $marks>=85){
-                echo '<span class="green">A</span>';
-             }elseif($marks<=84 && $marks>=75){
-                echo '<span class="orange">B</span>';
-             }elseif($marks<=74 && $marks>=65){
-                echo '<span class="yellow">C</span>';
-             }elseif($marks<=64 && $marks>=55){
-                echo '<span class="pink">D</span>';
-             }elseif($marks<=54 && $marks>=45){
-                echo '<span class="grey">E</span>';
-             }else{
-                echo '<span class="red">F</span>';
-             }
+include_once 'createtable1.php';
 
-        }
-       
+
+ function grade($perc){
+    $grade = '_';
+
+  if($perc>=90){
+     $grade = 'A';
+  }elseif($perc>=80 && $perc<=89){
+     $grade = 'B';
+  }elseif($perc>=60 && $perc<=79){
+    $grade = 'C';
+  }elseif($perc>=33 && $perc<=59){
+    $grade = 'D';
+  }else{
+     $grade = 'F';
+  }
+ 
+    return $grade;
+}
 
       if(isset($_POST['submit'])){  //if submit is set on post
           $name=$_POST['sname'];
@@ -88,21 +69,34 @@
           $javamrk=$_POST['java'];
           $dob=$_POST['dob'];
     
+    
         $obt= $engmrk + $hinmrk + $mathmrk + $scnmrk + $javamrk;
         $per = ($obt*100) / 500;
         $total = 100;
         $ftotal= $total * 5;
 
-     }
-     
+        $grade = grade($per);
 
-     
+
+     }
+  $result = "INSERT INTO StudentData (studentname, fathername, mothername,rollnumber,class,DOB,eng,hindi,math,science,java,obtained,total,percent,grade)
+  VALUES ('$name', '$father', '$mother', '$roll', '$class', '$dob', '$engmrk', '$hinmrk','$mathmrk', '$scnmrk', '$javamrk','$obt' , '$ftotal', '$per','$grade')";
+  
+  if ($conn->query($result) === TRUE) {
+    echo "New record created successfully";
+  } else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+  }
+  $conn->close();
+  
+
+
 ?>
 <div class="contain">
     <div class="con">
     <?php
 
-echo "<h3>Name : $name</h3>";
+/*echo "<h3>Name : $name</h3>";
 echo "<h3>Father's Name :  $father</h3>";
 echo "<h3>Mother's Name :  $mother</h3>"; ?>
 
@@ -111,7 +105,7 @@ echo "<h3>Mother's Name :  $mother</h3>"; ?>
 <?php
 echo "<h3>Roll Number : $roll</h3>";
 echo "<h3>Standard : $class</h3>";
-echo "<h3>DOB : $dob</h3>";
+echo "<h3>DOB : $dob</h3>";*/
 ?>
 </div>
     </div>
@@ -127,7 +121,7 @@ echo "<h3>DOB : $dob</h3>";
    <th>English</th>
    <td><?php echo $engmrk ?> </td>
    <td><?php echo $total ?> </td>
-   <td><?php echo get_grade($engmrk); ?> </td>
+   <td><?php echo grade($per) ?> </td>
 
 </tr>
     
@@ -135,38 +129,41 @@ echo "<h3>DOB : $dob</h3>";
     <th>Hindi</th>
     <td><?php echo $hinmrk ?> </td>
     <td><?php echo $total ?> </td>
-    <td><?php echo get_grade($hinmrk); ?> </td>
+    <td><?php echo grade($per) ?> </td>
 </tr>
 
     <tr>
       <th>Math</th>
       <td><?php echo $mathmrk ?> </td>
       <td><?php echo $total ?> </td>
-      <td><?php echo get_grade($mathmrk); ?> </td>
+      <td><?php echo grade($per) ?> </td>
     </tr>
     <tr>
       <th>Science</th>
       <td><?php echo $scnmrk ?> </td>
       <td><?php echo $total ?> </td>
-      <td><?php echo get_grade($scnmrk); ?> </td>
+      <td><?php echo grade($per) ?> </td>
     </tr>
     <tr>
       <th>Java</th>
       <td><?php echo $javamrk ?> </td>
       <td><?php echo $total ?> </td>
-      <td><?php echo get_grade($javamrk) ?> </td>
+      <td><?php echo grade($per) ?> </td>
 
     </tr>
     <tr>
         <th><h3 class="h">Result</h3></th>
         <td><?php echo " <b>Obtained Marks:  </b>" .$obt ?>
          <td><?php echo " <b>Total Marks: </b>" .$ftotal. " | <b>Percentage:  </b>" .$per. "%" ?> </td>  
-        <td><?php echo " <b>Grade :  </b>"; 
-        get_grade($per) ?> </td>
+        <td><?php echo " <b>Grade :  </b>" .grade($per) ?> </td>
     </tr>
    
 
 </table>
  
+
+
+
+
 </body>
 </html>
