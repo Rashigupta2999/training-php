@@ -1,3 +1,6 @@
+<?php
+include 'createtable1.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <style>
     input{
         width:450px;
@@ -19,14 +23,14 @@
     }
    </style>  
 <body>
+
     <h2 style="text-align:center">STUDENT MARKSHEET FORM</h2>
-<form method="post" action="marksheet1.php">
+<form method="post">
+     
       <h3>Enter your Name</h3>
-      <input type="text" name="sname"  placeholder="Student's name" required>
+      <input type="text" name="sname"  placeholder="Student's name" id= "n1"required>
       <h3>Enter your Father's name</h3>
       <input type="text" name="fname"  placeholder="Father's name" required>
-      <h3>Enter your roll number</h3>
-      <input type="number" name="roll" placeholder="Enter Roll number" required>
       <h3>Enter your Mother's name</h3>
       <input type="text" name="mname" placeholder="Mother's name" required>
      <h3>Enter your Standard</h3>
@@ -44,8 +48,46 @@
       <h3>Enter your Java Marks</h3>
       <input type="number" name="java" max="100" placeholder="Enter your Java Marks" required><br><br>
       <input type="submit" name="submit" class="submit" >
+      
+</form>
     
-</form>   
+<?php
+if(isset($_POST['submit'])){  //if submit is set on post
    
+    //  header("Location: http://localhost:8088/training/marksheet2.php");
+      $name=$_POST['sname'];
+      $father=$_POST['fname'];
+      $mother=$_POST['mname'];
+      $class=$_POST['class'];
+      $engmrk=$_POST['eng'];
+      $hinmrk=$_POST['hindi'];
+      $mathmrk=$_POST['math'];
+      $scnmrk=$_POST['science'];
+      $javamrk=$_POST['java'];
+      $dob=$_POST['dob'];
+  
+  
+      $obt= $engmrk + $hinmrk + $mathmrk + $scnmrk + $javamrk;
+      $per = ($obt*100) / 500;
+      $total = 100;
+      $ftotal= $total * 5;
+
+}
+     $result = "INSERT INTO StudentData (studentname, fathername, mothername,class,DOB,eng,hindi,math,science,java,obtained,total,percent)
+    VALUES ('$name', '$father', '$mother', '$class', '$dob', '$engmrk', '$hinmrk','$mathmrk', '$scnmrk', '$javamrk','$obt' , '$ftotal', '$per')";
+    
+    if ($conn->query($result) == TRUE) {
+      echo "";
+    } else {
+      echo "";
+    }
+if(isset($_POST['submit'])){  //if submit is set on post
+       header("Location: http://localhost:8088/training/marksheet2.php");
+   exit();
+
+}
+
+?>
+
 </body>
 </html>

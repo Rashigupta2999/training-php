@@ -8,6 +8,7 @@
 </head>
 <?php
 include 'createtable1.php';
+
 ?>
 <style>
     input{
@@ -24,7 +25,7 @@ include 'createtable1.php';
 <body>
 
     <h2 style="text-align:center">STUDENT MARKSHEET FORM</h2>
-<form method="post" action="marksheet2.php">
+<form method="post">
      
       <h3>Enter your Name</h3>
       <input type="text" name="sname"  placeholder="Student's name" >
@@ -32,8 +33,6 @@ include 'createtable1.php';
       <input type="text" name="fname"  placeholder="Father's name" >
       <h3>Enter your Mother's name</h3>
       <input type="text" name="mname" placeholder="Mother's name" >
-      <h3>Enter your roll number</h3>
-      <input type="number" name="roll" placeholder="Enter Roll number" >
      <h3>Enter your Standard</h3>
       <input type="text" name="class" placeholder="Enter your Class" >
       <h3>Enter your Date Of Birth</h3>
@@ -55,8 +54,36 @@ include 'createtable1.php';
     
 <?php
 if(isset($_POST['submit'])){  //if submit is set on post
-   header("Location: http://localhost:8088/training/marksheet2.php");
-   exit();
+    $name=$_POST['sname'];
+    $father=$_POST['fname'];
+    $mother=$_POST['mname'];
+    $class=$_POST['class'];
+    $engmrk=$_POST['eng'];
+    $hinmrk=$_POST['hindi'];
+    $mathmrk=$_POST['math'];
+    $scnmrk=$_POST['science'];
+    $javamrk=$_POST['java'];
+    $dob=$_POST['dob'];
+
+
+    $obt= $engmrk + $hinmrk + $mathmrk + $scnmrk + $javamrk;
+    $per = ($obt*100) / 500;
+    $total = 100;
+    $ftotal= $total * 5;
+
+}
+   $result = "INSERT INTO StudentData (studentname, fathername, mothername,class,DOB,eng,hindi,math,science,java,obtained,total,percent)
+  VALUES ('$name', '$father', '$mother', '$class', '$dob', '$engmrk', '$hinmrk','$mathmrk', '$scnmrk', '$javamrk','$obt' , '$ftotal', '$per')";
+  
+  if ($conn->query($result) == TRUE) {
+    echo "";
+  } else {
+    echo "";
+  }
+  if(isset($_POST['submit'])){  //if submit is set on post
+    header("Location: http://localhost:8088/training/marksheet2.php");
+exit();
+
 }
 if(isset($_POST['cancel'])){  //if submit is set on post
     header("Location: http://localhost:8088/training/marksheet2.php");

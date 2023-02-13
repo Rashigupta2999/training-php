@@ -1,8 +1,10 @@
 <?php
 include 'createtable1.php';
-$roll=$_GET['rn1'];
-$query= "DELETE FROM StudentData WHERE rollnumber = '$roll'";
-$data= mysqli_query($conn,$query);
+if(isset($_GET['deleteid'])){
+    $id=$_GET['deleteid'];
+
+$query= "DELETE FROM StudentData WHERE rollnumber = $id";
+$data= mysqli_query($conn,$query);  //connection variable
 if($data){
     echo "<script>alert('Delete Record Successfully')</script>";
     ?>
@@ -12,5 +14,6 @@ if($data){
 
 } else{
     echo "Unable to delete record";
+}
 }
 ?>
