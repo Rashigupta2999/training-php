@@ -25,7 +25,7 @@ include 'createtable1.php';
 <body>
 
     <h2 style="text-align:center">STUDENT MARKSHEET FORM</h2>
-<form method="post">
+<form method="post" id="form">
      
       <h3>Enter your Name</h3>
       <input type="text" name="sname"  placeholder="Student's name" id= "n1"required>
